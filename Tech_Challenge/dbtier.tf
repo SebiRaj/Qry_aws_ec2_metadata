@@ -21,3 +21,15 @@ resource "aws_security_group" "DB_security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+# DB - Subnet Group
+resource "aws_db_subnet_group" "DB_subnet" {
+  name       = "db-subnet"
+  subnet_ids = [for value in aws_subnet.DB_Priv_Subnet: value.id]
+
+  tags = {
+    Name = "My DB subnet group"
+  }
+}
+
+
