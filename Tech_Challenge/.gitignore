@@ -1,0 +1,7 @@
+.git/
+.terraform/
+.terraform/providers/*
+*.log
+env/
+target/
+*.exe
