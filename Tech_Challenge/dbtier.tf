@@ -33,3 +33,24 @@ resource "aws_db_subnet_group" "DB_subnet" {
 }
 
 
+# DB - RDS Instance
+resource "aws_db_instance" "DB_postgres" {
+  allocated_storage        = 20 # gigabytes
+  backup_retention_period  = 7   # in days
+  db_subnet_group_name     = aws_db_subnet_group.DB_subnet.name
+  engine                   = "postgres"
+  engine_version           = "12.4"
+  identifier               = "dbpostgres"
+  instance_class           = "db.t3.micro"
+  multi_az                 = false
+  name                     = "dbpostgres"
+  username                 = "dbadmin"
+  password                 = "Tech_challenge_$123"
+  port                     = 5432
+  publicly_accessible      = false
+  storage_encrypted        = true
+  storage_type             = "gp2"
+  vpc_security_group_ids   = [aws_security_group.DB_security_group.id]
+  skip_final_snapshot      = true
+}
+
