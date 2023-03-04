@@ -60,3 +60,49 @@ resource "aws_lb_listener" "APP_listener" {
 }
 
 
+# App - EC2 Instance Security Group
+resource "aws_security_group" "APP_instance_sg" {
+  name        = "app-server-security-group"
+  description = "Allowing requests to the app servers"
+  vpc_id = aws_vpc.threetier_vpc.id
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    security_groups = [aws_security_group.ALB_app_http.id]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "app-server-security-group"
+  }
+}
+
+# App - Launch Template
+resource "aws_launch_template" "APP_launch_template" {
+  name_prefix   = "app-launch-template"
+  image_id      = "ami-0f8ca728008ff5af4"
+  instance_type = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.APP_instance_sg.id]
+}
+
+# App - Auto Scaling Group
+resource "aws_autoscaling_group" "APP_asg" {
+  desired_capacity   = 0
+  max_size           = 0
+  min_size           = 0
+  target_group_arns = [aws_lb_target_group.APP_target_group.arn]
+  vpc_zone_identifier = [for value in aws_subnet.App_Priv_Subnet: value.id]
+
+  launch_template {
+    id      = aws_launch_template.APP_launch_template.id
+    version = "$Latest"
+  }
+}
