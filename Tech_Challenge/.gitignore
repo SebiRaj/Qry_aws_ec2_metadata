@@ -2,7 +2,7 @@
 .terraform/
 .terraform/providers/*
 *.log
-env/
+#env/
 target/
 *.exe
 .terraform.lock.hcl
