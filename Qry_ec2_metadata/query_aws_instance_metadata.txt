@@ -1,0 +1,104 @@
+Step1: Configure AWS CLI
+
+    PS C:\AWS_Devops\import_metadata> aws configure
+    AWS Access Key ID [****************5QLS]:
+    AWS Secret Access Key [****************16V/]:
+    Default region name [ap-south-1]:
+    Default output format [json]:
+    PS C:\AWS_Devops\import_metadata>
+
+
+Step2: export AWS_DEFAULT_OUTPUT="json"
+
+    PS C:\AWS_Devops\import_metadata>  export AWS_DEFAULT_OUTPUT="json"
+
+Step3: Execute the below command
+
+PS C:\AWS_Devops\import_metadata> aws ec2 describe-instances 
+{
+    "Reservations": [
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-0f8ca728008ff5af4",
+                    "InstanceId": "i-0a46f5103c609c239",
+                    "InstanceType": "t2.micro",
+                    "KeyName": "NewSebiKey",
+                    "LaunchTime": "2023-03-05T02:26:45+00:00",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "ap-south-1a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+
+Step4: Execute the below command
+
+PS C:\Users\sseba\Downloads> aws ec2 describe-instances --instance-ids "i-0a46f5103c609c239"
+{
+    "Reservations": [
+        {
+            "Groups": [],
+            "Instances": [
+                {
+                    "AmiLaunchIndex": 0,
+                    "ImageId": "ami-0f8ca728008ff5af4",
+                    "InstanceId": "i-0a46f5103c609c239",
+                    "InstanceType": "t2.micro",
+                    "KeyName": "NewSebiKey",
+                    "LaunchTime": "2023-03-05T02:26:45+00:00",
+                    "Monitoring": {
+                        "State": "disabled"
+                    },
+                    "Placement": {
+                        "AvailabilityZone": "ap-south-1a",
+                        "GroupName": "",
+                        "Tenancy": "default"
+                    },
+                    "PrivateDnsName": "ip-172-31-40-71.ap-south-1.compute.internal",
+                    "PrivateIpAddress": "172.31.40.71",
+                    "ProductCodes": [],
+                    "PublicDnsName": "ec2-3-108-223-128.ap-south-1.compute.amazonaws.com",
+                    "PublicIpAddress": "3.108.223.128",
+                    "State": {
+                        "Code": 16,
+                        "Name": "running"
+                    },
+                    "StateTransitionReason": "",
+                    "SubnetId": "subnet-08932df7b8d6b14b8",
+                    "VpcId": "vpc-07f9f94e3adbf1693",
+                    "Architecture": "x86_64",
+                    "BlockDeviceMappings": [
+                        {
+                            "DeviceName": "/dev/sda1",
+                            "Ebs": {
+                                "AttachTime": "2023-03-04T16:48:21+00:00",
+                                "DeleteOnTermination": true,
+                                "Status": "attached",
+                                "VolumeId": "vol-09e87c076f8037829"
+                            }
+                        }
+                    ],
+                    "ClientToken": "422ecd92-a6d0-4f8c-8c06-cf156a5cb1ae",
+                    "EbsOptimized": false,
+                    "EnaSupport": true,
+                    "Hypervisor": "xen",
+                    "NetworkInterfaces": [
+                        {
+                            "Association": {
+                                "IpOwnerId": "amazon",
+                                "PublicDnsName": "ec2-3-108-223-128.ap-south-1.compute.amazonaws.com",
+                                "PublicIp": "3.108.223.128"
+                            },
+                            "Attachment": {
+                                "AttachTime": "2023-03-04T16:48:20+00:00",
+                                "AttachmentId": "eni-attach-0616c949f862e1f77",
+                                "DeleteOnTermination": true,
+                                "DeviceIndex": 0,
+                                "Status": "attached",
+                                "NetworkCardIndex": 0
+-- More  --
