@@ -9,7 +9,11 @@ target/
 
 **/.terraform/*
 .terraform.lock.hcl
+<<<<<<< HEAD
 
+=======
+terraform/terraform.tfvars
+>>>>>>> parent of d13b2c5 (added dev.tfvars file)
 
 # Compiled files
 *.tfstate
