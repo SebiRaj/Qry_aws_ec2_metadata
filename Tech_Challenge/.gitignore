@@ -10,7 +10,6 @@ target/
 **/.terraform/*
 .terraform.lock.hcl
 
-terraform/terraform.tfvars
 
 # Compiled files
 *.tfstate
